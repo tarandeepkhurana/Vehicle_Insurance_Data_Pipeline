@@ -3,6 +3,7 @@ projectflow.txt
 crashcourse.txt
 .env
 notebook/rf_model.pkl 
+artifact/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
