@@ -6,8 +6,8 @@ from src.constants import AWS_SECRET_ACCESS_KEY_ENV_KEY, AWS_ACCESS_KEY_ID_ENV_K
 
 class S3Client:
 
-    s3_client=None
-    s3_resource = None
+    s3_client=None       #Class level attributes - every instance could access them S3Client.s3_client
+    s3_resource = None   #Class level attributes
     def __init__(self, region_name=REGION_NAME):
         """ 
         This Class gets aws credentials from env_variable and creates an connection with s3 bucket 
@@ -21,7 +21,8 @@ class S3Client:
                 raise Exception(f"Environment variable: {AWS_ACCESS_KEY_ID_ENV_KEY} is not not set.")
             if __secret_access_key is None:
                 raise Exception(f"Environment variable: {AWS_SECRET_ACCESS_KEY_ENV_KEY} is not set.")
-        
+            
+            #Both point to the AWS S3 service using your credentials + region
             S3Client.s3_resource = boto3.resource('s3',
                                             aws_access_key_id=__access_key_id,
                                             aws_secret_access_key=__secret_access_key,
@@ -32,5 +33,7 @@ class S3Client:
                                         aws_secret_access_key=__secret_access_key,
                                         region_name=region_name
                                         )
+        
+        #This step is just assigning the class variables to instance variables though under the hood they all point to the same object.
         self.s3_resource = S3Client.s3_resource
         self.s3_client = S3Client.s3_client

@@ -28,7 +28,8 @@ class MongoDBClient:
     """
 
     client = None  # Shared MongoClient instance across all MongoDBClient instances
-
+    
+    #when you instantiate, the constructor runs and establishes connection
     def __init__(self, database_name: str = DATABASE_NAME) -> None:
         """
         Initializes a connection to the MongoDB database. If no existing connection is found, it establishes a new one.
